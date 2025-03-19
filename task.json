@@ -1,15 +1,22 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-2:198711534108:task-definition/livechatapp:2",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-2:198711534108:task-definition/livechatapp:4",
     "containerDefinitions": [
         {
             "name": "livechatapp",
-            "image": "198711534108.dkr.ecr.us-east-2.amazonaws.com/shas-portfolio",
+            "image": "198711534108.dkr.ecr.us-east-2.amazonaws.com/livechatapp:latest",
             "cpu": 0,
             "portMappings": [
                 {
                     "name": "livechatapp-3000-tcp",
                     "containerPort": 3000,
                     "hostPort": 3000,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                },
+                {
+                    "name": "livechatapp-80-tcp",
+                    "containerPort": 80,
+                    "hostPort": 80,
                     "protocol": "tcp",
                     "appProtocol": "http"
                 }
@@ -38,7 +45,7 @@
     "family": "livechatapp",
     "executionRoleArn": "arn:aws:iam::198711534108:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 2,
+    "revision": 4,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -84,8 +91,8 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2025-03-19T16:28:55.849Z",
-    "registeredBy": "arn:aws:iam::198711534108:user/dev",
+    "registeredAt": "2025-03-19T17:09:42.817Z",
+    "registeredBy": "arn:aws:iam::198711534108:root",
     "enableFaultInjection": false,
     "tags": []
 }
