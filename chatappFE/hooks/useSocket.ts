@@ -1,3 +1,4 @@
+"use client";
 // hooks/useSocket.ts
 import { useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
