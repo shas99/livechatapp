@@ -1,0 +1,20 @@
+// hooks/useSocket.ts
+import { useEffect, useState } from 'react';
+import { io, Socket } from 'socket.io-client';
+
+const SOCKET_URL = 'http://localhost:5000'; // Adjust if needed
+
+export function useSocket() {
+    const [socket, setSocket] = useState<Socket | null>(null); // ✅ Correct typing
+
+    useEffect(() => {
+        const newSocket: Socket = io(SOCKET_URL);
+        setSocket(newSocket);
+
+        return () => {
+            newSocket.disconnect();
+        };
+    }, []);
+
+    return socket;
+}

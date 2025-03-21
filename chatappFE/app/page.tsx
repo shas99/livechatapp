@@ -1,18 +1,54 @@
+"use client";
 import Image from "next/image";
+import { useSocket } from '@/hooks/useSocket';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 export default function Home() {
+  const socket = useSocket();
+
+  useEffect(() => {
+    alert("Hello")
+      if (socket) {
+          socket.emit('events', { name: 'Nest' });
+
+          socket.on('response', (data) => {
+              console.log('Server response:', data);
+          });
+      }
+  }, [socket]);
+  
+  const [data, setData] = useState(null);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch('http://localhost:5000'); // Replace with your actual endpoint
+  //       if (response.ok) {
+  //         const result = await response.json();
+  //         setData(result);
+  //       } else {
+  //         console.error('Failed to fetch data');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         Hello world!
-        <Image
+        {/* <Image
           className="dark:invert"
           src="/next.svg"
           alt="Next.js logo"
           width={180}
           height={38}
           priority
-        />
+        /> */}
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}
