@@ -9,6 +9,7 @@ export function useSocket(username : string) {
     const [socket, setSocket] = useState<Socket | null>(null); // ✅ Correct typing
 
     useEffect(() => {
+        console.log(SOCKET_URL)
         const newSocket: Socket = io(SOCKET_URL);
         setSocket(newSocket);
         newSocket.auth = {username: username}
