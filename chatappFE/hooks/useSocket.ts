@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 
-const SOCKET_URL = 'http://localhost:5000'; // Adjust if needed
-// const SOCKET_URL = 'http://livechatappnest-565007551.us-east-2.elb.amazonaws.com'; // Adjust if needed
+
+const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL
 
 export function useSocket(username : string) {
     const [socket, setSocket] = useState<Socket | null>(null); // ✅ Correct typing
@@ -11,7 +11,7 @@ export function useSocket(username : string) {
     useEffect(() => {
         const newSocket: Socket = io(SOCKET_URL);
         setSocket(newSocket);
-        newSocket.auth = {username}
+        newSocket.auth = {username: username}
         return () => {
             newSocket.disconnect();
         };
