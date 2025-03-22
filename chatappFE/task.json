@@ -1,9 +1,9 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-2:198711534108:task-definition/livechatapp:22",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-2:198711534108:task-definition/livechatapp:24",
     "containerDefinitions": [
         {
             "name": "livechatapp",
-            "image": "198711534108.dkr.ecr.us-east-2.amazonaws.com/livechatapp:4a3ea4143480cc53ad03ac05808f69dd7aabbcac",
+            "image": "198711534108.dkr.ecr.us-east-2.amazonaws.com/livechatapp:0c0f6e498eed8cc80532597b0d2d099195c7c4ab",
             "cpu": 0,
             "portMappings": [
                 {
@@ -23,7 +23,6 @@
             ],
             "essential": true,
             "environment": [],
-            "environmentFiles": [],
             "mountPoints": [],
             "volumesFrom": [],
             "secrets": [
@@ -41,8 +40,7 @@
                     "max-buffer-size": "25m",
                     "awslogs-region": "us-east-2",
                     "awslogs-stream-prefix": "ecs"
-                },
-                "secretOptions": []
+                }
             },
             "systemControls": []
         }
@@ -50,7 +48,7 @@
     "family": "livechatapp",
     "executionRoleArn": "arn:aws:iam::198711534108:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 22,
+    "revision": 24,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -99,7 +97,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2025-03-22T10:54:32.381Z",
-    "registeredBy": "arn:aws:iam::198711534108:root",
+    "registeredAt": "2025-03-22T11:12:52.317Z",
+    "registeredBy": "arn:aws:iam::198711534108:user/dev",
     "tags": []
 }
