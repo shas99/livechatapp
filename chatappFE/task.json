@@ -1,9 +1,9 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-2:198711534108:task-definition/livechatapp:24",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-2:198711534108:task-definition/livechatapp:26",
     "containerDefinitions": [
         {
             "name": "livechatapp",
-            "image": "198711534108.dkr.ecr.us-east-2.amazonaws.com/livechatapp:0c0f6e498eed8cc80532597b0d2d099195c7c4ab",
+            "image": "198711534108.dkr.ecr.us-east-2.amazonaws.com/livechatapp:74fd4d6ac884ef1739fbc6fe1545b23eca0620ad",
             "cpu": 0,
             "portMappings": [
                 {
@@ -40,15 +40,17 @@
                     "max-buffer-size": "25m",
                     "awslogs-region": "us-east-2",
                     "awslogs-stream-prefix": "ecs"
-                }
+                },
+                "secretOptions": []
             },
             "systemControls": []
         }
     ],
     "family": "livechatapp",
+    "taskRoleArn": "arn:aws:iam::198711534108:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::198711534108:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 24,
+    "revision": 26,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -66,6 +68,9 @@
         },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
         },
         {
             "name": "ecs.capability.execution-role-ecr-pull"
@@ -97,7 +102,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2025-03-22T11:12:52.317Z",
-    "registeredBy": "arn:aws:iam::198711534108:user/dev",
+    "registeredAt": "2025-03-22T14:37:37.572Z",
+    "registeredBy": "arn:aws:iam::198711534108:root",
     "tags": []
 }
