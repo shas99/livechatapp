@@ -5,19 +5,34 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 
 export default function Home() {
-  const socket = useSocket();
 
-  useEffect(() => {
-    alert("Hello")
-      if (socket) {
-          socket.emit('events', { name: 'Nest' });
+  const [inputValue, setInputValue] = useState("");
 
-          socket.on('response', (data) => {
-              console.log('Server response:', data);
-          });
-      }
-  }, [socket]);
-  
+  const socket = useSocket(inputValue);
+
+  // useEffect(() => {
+  //   alert("Hello")
+  //     if (socket) {
+  //         socket.emit('events', { name: 'Nest' });
+
+  //         socket.on('response', (data) => {
+  //             console.log('Server response:', data);
+  //         });
+  //     }
+  // }, [socket]);
+
+  const handleClick = () => {
+    console.log("hello")
+    console.log(socket)
+    if (socket) {
+      socket.emit('events', { name: 'Nest' });
+
+      socket.on('response', (data) => {
+          console.log('Server response:', data);
+      });
+  }
+  }
+
   const [data, setData] = useState(null);
 
   // useEffect(() => {
@@ -49,6 +64,19 @@ export default function Home() {
           height={38}
           priority
         /> */}
+         <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        placeholder="Enter text here..."
+        className="p-2 border rounded-md mb-4"
+      />
+      <button
+        onClick={handleClick}
+        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+      >
+        Click Me
+      </button>
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}
