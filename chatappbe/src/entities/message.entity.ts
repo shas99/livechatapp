@@ -28,7 +28,7 @@ export class Message {
   id: number;
 
   @Column()
-  from: string;
+  sender: string;
 
   @Column({ type: 'varchar', nullable: true })
   to: string | null;
