@@ -1,9 +1,9 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-2:198711534108:task-definition/livechatapp:29",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-2:198711534108:task-definition/livechatapp:35",
     "containerDefinitions": [
         {
             "name": "livechatapp",
-            "image": "198711534108.dkr.ecr.us-east-2.amazonaws.com/livechatapp:fab705c3e870580a8c0c57c28511ee379cfc0b7c",
+            "image": "198711534108.dkr.ecr.us-east-2.amazonaws.com/livechatapp:923d1b67b6d24b1a0c5ff443bdcd23babca7cc12",
             "cpu": 0,
             "portMappings": [
                 {
@@ -22,12 +22,7 @@
                 }
             ],
             "essential": true,
-            "environment": [
-                {
-                    "name": "NEXT_PUBLIC_clientId",
-                    "value": "arn:aws:ssm:us-east-2:198711534108:parameter/NEXT_PUBLIC_clientId"
-                }
-            ],
+            "environment": [],
             "mountPoints": [],
             "volumesFrom": [],
             "secrets": [
@@ -38,6 +33,10 @@
                 {
                     "name": "NEXT_PUBLIC_authority",
                     "valueFrom": "arn:aws:ssm:us-east-2:198711534108:parameter/NEXT_PUBLIC_authority"
+                },
+                {
+                    "name": "NEXT_PUBLIC_clientId",
+                    "valueFrom": "arn:aws:ssm:us-east-2:198711534108:parameter/NEXT_PUBLIC_clientId"
                 },
                 {
                     "name": "NEXT_PUBLIC_cognitoDomain",
@@ -79,7 +78,7 @@
     "taskRoleArn": "arn:aws:iam::198711534108:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::198711534108:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 29,
+    "revision": 35,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -131,7 +130,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2025-03-23T10:06:00.735Z",
+    "registeredAt": "2025-03-23T14:45:19.822Z",
     "registeredBy": "arn:aws:iam::198711534108:root",
     "tags": []
 }
