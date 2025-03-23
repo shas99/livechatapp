@@ -1,10 +1,22 @@
 "use client"
 import React from "react";
 import { useAuth } from "react-oidc-context";
+import { useEffect } from 'react';
 
 
 export default function Page() {
     const auth = useAuth();
+
+      useEffect(() => {
+        console.log(auth.isAuthenticated)
+        // if(!auth.isAuthenticated){
+        //   router.push("/login");
+        // }else{
+        //   setIsLoading(false);
+        // }
+    
+    
+      }, []);
 
     if (auth.isLoading) {
       return <div>Loading...</div>;

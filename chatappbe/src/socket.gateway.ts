@@ -26,16 +26,16 @@ export class PollsGateway implements OnGatewayInit, OnGatewayDisconnect,OnGatewa
 
     handleConnection(client: Socket){
         const username = client.handshake.auth.username
-        console.log(`Client connected ${username}`);
+        console.log(`Client connected- handle connection ${username}`);
         this.users.push(username)
+        client.emit("welcomeMessage", this.users);
     }  
 
 
     @SubscribeMessage('events')
     handleEvent(@MessageBody() data: string,@ConnectedSocket() client: Socket): string {
         const username = client.handshake.auth.username;
-        console.log(`Client connected ${username}`);
-        this.users.push(username)
+        console.log(`Message received from ${username}, ${JSON.stringify(data)}`);
         this.server.emit('response', { message: 'Hello from the server!', receivedData: data,username:username,users:this.users });
         return data;
     }
