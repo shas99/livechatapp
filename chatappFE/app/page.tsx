@@ -67,17 +67,21 @@ export default function Home() {
   }, [socket,auth]);
 
 
-  // const handleClick = () => {
-  //   console.log("hello")
-  //   console.log(socket)
-  //   if (socket) {
-  //     socket.emit('events', { name: auth.user?.profile.email });
+  const handleClick = () => {
 
-  //     socket.on('response', (data) => {
-  //         console.log('Server response:', data);
-  //     });
-  // }
-  // }
+    if (socket) {
+      socket.emit('events', { selectedContact, message,from: inputValue});
+
+      socket.on('response', (data) => {
+          console.log('Server response:', data);
+      });
+  }
+  }
+
+
+  const SelectUser = (user:string) => {
+    setSelectedContact(user)
+  }
 
   if (auth.isAuthenticated) {
     return (
@@ -89,7 +93,7 @@ export default function Home() {
       <h2>User List</h2>
       <ul>
         {users.map(user => (
-          <li key={user}>{user}</li>
+          <li key={user} onClick={() => SelectUser(user)}>{user}</li>
         ))}
       </ul>
     </div>
@@ -101,12 +105,12 @@ export default function Home() {
         placeholder="Enter text here..."
         className="p-2 border rounded-md mb-4"
       />
-      {/* <button
+      <button
         onClick={handleClick}
         className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
       >
         Click Me
-             </button> */}
+             </button>
 
         
       </div>
