@@ -1,9 +1,9 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-2:198711534108:task-definition/livechatapp:26",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-2:198711534108:task-definition/livechatapp:29",
     "containerDefinitions": [
         {
             "name": "livechatapp",
-            "image": "198711534108.dkr.ecr.us-east-2.amazonaws.com/livechatapp:74fd4d6ac884ef1739fbc6fe1545b23eca0620ad",
+            "image": "198711534108.dkr.ecr.us-east-2.amazonaws.com/livechatapp:fab705c3e870580a8c0c57c28511ee379cfc0b7c",
             "cpu": 0,
             "portMappings": [
                 {
@@ -22,13 +22,42 @@
                 }
             ],
             "essential": true,
-            "environment": [],
+            "environment": [
+                {
+                    "name": "NEXT_PUBLIC_clientId",
+                    "value": "arn:aws:ssm:us-east-2:198711534108:parameter/NEXT_PUBLIC_clientId"
+                }
+            ],
             "mountPoints": [],
             "volumesFrom": [],
             "secrets": [
                 {
                     "name": "NEXT_PUBLIC_SOCKET_URL",
                     "valueFrom": "arn:aws:ssm:us-east-2:198711534108:parameter/NEXT_PUBLIC_SOCKET_URL"
+                },
+                {
+                    "name": "NEXT_PUBLIC_authority",
+                    "valueFrom": "arn:aws:ssm:us-east-2:198711534108:parameter/NEXT_PUBLIC_authority"
+                },
+                {
+                    "name": "NEXT_PUBLIC_cognitoDomain",
+                    "valueFrom": "arn:aws:ssm:us-east-2:198711534108:parameter/NEXT_PUBLIC_cognitoDomain"
+                },
+                {
+                    "name": "NEXT_PUBLIC_logoutUri",
+                    "valueFrom": "arn:aws:ssm:us-east-2:198711534108:parameter/NEXT_PUBLIC_logoutUri"
+                },
+                {
+                    "name": "NEXT_PUBLIC_redirect_uri",
+                    "valueFrom": "arn:aws:ssm:us-east-2:198711534108:parameter/NEXT_PUBLIC_redirect_uri"
+                },
+                {
+                    "name": "NEXT_PUBLIC_response_type",
+                    "valueFrom": "arn:aws:ssm:us-east-2:198711534108:parameter/NEXT_PUBLIC_response_type"
+                },
+                {
+                    "name": "NEXT_PUBLIC_scope",
+                    "valueFrom": "arn:aws:ssm:us-east-2:198711534108:parameter/NEXT_PUBLIC_scope"
                 }
             ],
             "logConfiguration": {
@@ -50,7 +79,7 @@
     "taskRoleArn": "arn:aws:iam::198711534108:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::198711534108:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 26,
+    "revision": 29,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -102,7 +131,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2025-03-22T14:37:37.572Z",
+    "registeredAt": "2025-03-23T10:06:00.735Z",
     "registeredBy": "arn:aws:iam::198711534108:root",
     "tags": []
 }
