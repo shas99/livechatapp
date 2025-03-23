@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useAuth } from "react-oidc-context";
 import { useRouter } from "next/navigation";
+import { redirect } from 'next/navigation';
 
 export default function Home() {
 
@@ -25,10 +26,25 @@ export default function Home() {
     return <div>Encountering error... {auth.error.message}</div>;
   }
 
-  socket?.on("welcomeMessage", (data) => {
-    console.log("Connected Users:", data);
-    setUsers([...data])
-  });
+  useEffect(() => {
+    if (!socket) return;
+  
+    const handleWelcomeMessage = (data:any) => {
+      console.log("Connected Users:", data);
+      setUsers([...data]);
+    };
+  
+    socket.on("welcomeMessage", handleWelcomeMessage);
+  
+    return () => {
+      socket.off("welcomeMessage", handleWelcomeMessage); // Cleanup to avoid stacking
+    };
+  }, [socket]); // Runs only when socket changes
+
+  // socket?.on("welcomeMessage", (data) => {
+  //   console.log("Connected Users:", data);
+  //   setUsers([...data])
+  // });
 
   // if (auth.isAuthenticated) {
   //   return (
@@ -55,6 +71,14 @@ export default function Home() {
   }, [socket,auth]);
 
   useEffect(() => {
+
+    if(socket && auth){
+      if(!auth.isAuthenticated){
+        if (!auth || auth.isLoading) return;
+        console.log(auth)
+        redirect('/login');
+      }
+    }
 
     if (socket && auth) {
       socket.emit('events', { name: "Hello" });
