@@ -26,10 +26,25 @@ export default function Home() {
     return <div>Encountering error... {auth.error.message}</div>;
   }
 
-  socket?.on("welcomeMessage", (data) => {
-    console.log("Connected Users:", data);
-    setUsers([...data])
-  });
+  useEffect(() => {
+    if (!socket) return;
+  
+    const handleWelcomeMessage = (data:any) => {
+      console.log("Connected Users:", data);
+      setUsers([...data]);
+    };
+  
+    socket.on("welcomeMessage", handleWelcomeMessage);
+  
+    return () => {
+      socket.off("welcomeMessage", handleWelcomeMessage); // Cleanup to avoid stacking
+    };
+  }, [socket]); // Runs only when socket changes
+
+  // socket?.on("welcomeMessage", (data) => {
+  //   console.log("Connected Users:", data);
+  //   setUsers([...data])
+  // });
 
   // if (auth.isAuthenticated) {
   //   return (

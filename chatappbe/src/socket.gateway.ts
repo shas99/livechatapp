@@ -25,14 +25,16 @@ export class PollsGateway implements OnGatewayInit, OnGatewayDisconnect,OnGatewa
         const username = client.handshake.auth.username
         console.log(`Client disconnected: ${username}`);
         this.users = this.users.filter((user:String) => user != username)
+        this.server.emit("welcomeMessage", this.users);
       }
 
     async handleConnection(client: Socket){
         const username = client.handshake.auth.username
-        console.log(`Client connected- handle connection ${username}`);Object
+        console.log(`Client connected- handle connection ${username}`);
         this.users.push(username)
+        client.join(username);
+        this.server.emit("welcomeMessage", this.users);
         await this.connectedUserService.addUser(username);
-        client.emit("welcomeMessage", this.users);
     }  
 
 
@@ -42,7 +44,14 @@ export class PollsGateway implements OnGatewayInit, OnGatewayDisconnect,OnGatewa
         await this.messageService.saveMessage(username, 'test@example', data.message);
 
         console.log(`Message received from ${username}, ${JSON.stringify(data)}`);
-        this.server.emit('response', { message: 'Hello from the server!', receivedData: data,username:username,users:this.users });
+
+        this.server.to(data.selectedContact).emit('response', {
+            from: username,
+            message: data.message,
+          });
+
+
+        // this.server.emit('response', { message: 'Hello from the server!', receivedData: data,username:username,users:this.users });
         return data;
     }
 
