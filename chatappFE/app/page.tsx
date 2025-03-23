@@ -97,28 +97,153 @@ export default function Home() {
   if (auth.isAuthenticated) {
     return (
       <div>
-        <pre> Hello: {auth.user?.profile.email} </pre>
+        {/* <pre> Hello: {auth.user?.profile.email} </pre> */}
 
 <div>
-<button onClick={() => auth.removeUser()}>Sign out</button>
-      <h2>User List</h2>
-      <ul>
-        {users.map(user => (
-          <li key={user} onClick={() => SelectUser(user)}>{user}</li>
-        ))}
-      </ul>
-    </div>
-    <div>
-    <div>
+  
+{/* <button onClick={() => auth.removeUser()}>Sign out</button> */}
+{/* Sidebar for User List */}
+      {/* <div className="w-full md:w-1/4 bg-white border-r border-gray-300">
+        <div className="p-4 flex justify-between items-center border-b border-gray-200">
+          <h2 className="text-xl font-semibold">Users</h2>
+          <button
+            onClick={() => auth.removeUser()}
+            className="text-sm text-red-500 hover:text-red-700"
+          >
+            Sign out
+          </button>
+        </div>
+
+        <ul className="overflow-auto h-[calc(100vh-64px)]">
+          {users.map(user => (
+            <li
+              key={user}
+              className="p-4 cursor-pointer hover:bg-gray-100"
+              onClick={() => SelectUser(user)}
+            >
+              {user}
+            </li>
+          ))}
+        </ul>
+      </div>
+          
+            <div className="flex-1 flex flex-col justify-between">
+
+<div className="overflow-auto p-4 space-y-2 flex flex-col">
   {pastMessages.map((message, index) => (
-    <div key={index}>
+    <div
+      key={index}
+      className={`p-2 rounded-lg max-w-[70%] ${
+        message.sentByCurrentUser ? 'self-end bg-green-200' : 'self-start bg-white'
+      } shadow`}
+    >
       {message.content}
     </div>
   ))}
 </div>
-    </div>
 
+<div className="p-4 bg-gray-200">
+  <div className="flex space-x-2">
     <input
+      type="text"
+      value={message}
+      onChange={(e) => setMessage(e.target.value)}
+      placeholder="Enter message..."
+      className="flex-1 p-2 border rounded-md focus:outline-none"
+    />
+    <button
+      onClick={handleClick}
+      className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+    >
+      Send
+    </button>
+  </div>
+</div>
+
+</div> */}
+<div className="flex h-screen bg-gray-100">
+            {/* Sidebar for User List */}
+            <div className="w-1/4 bg-gray-800 border-r border-gray-700 flex flex-col">
+        <div className="p-4 flex justify-between items-center border-b border-gray-700">
+          <h2 className="text-xl font-semibold text-white">Users</h2>
+          <button
+            onClick={() => auth.removeUser()}
+            className="text-sm text-red-400 hover:text-red-600"
+          >
+            Sign out
+          </button>
+        </div>
+
+        <ul className="overflow-auto flex-1">
+          {users.map(user => (
+            <li
+              key={user}
+              className="p-3 cursor-pointer hover:bg-gray-700 border-b border-gray-600"
+              onClick={() => SelectUser(user)}
+            >
+              <span className="text-white">{user}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      {/* chat area */}
+      <div className="flex flex-col flex-1">
+
+      <div className="flex flex-col flex-1">
+
+        <div className="overflow-auto p-4 flex-1 space-y-2 bg-gray-100">
+          {pastMessages.map((message, index) => (
+            <div
+              key={index}
+              className={`p-3 rounded-lg max-w-[70%] ${
+                message.sentByCurrentUser ? 'self-end bg-green-400 text-white' : 'self-start bg-gray-300 text-gray-900'
+              } shadow`}
+            >
+              {message.content}
+            </div>
+          ))}
+        </div>
+
+        <div className="p-4 bg-gray-200">
+          <div className="flex space-x-2">
+            <input
+              type="text"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Type a message..."
+              className="flex-1 p-2 border rounded-md focus:outline-none text-black"
+            />
+            <button
+              onClick={handleClick}
+              className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+            >
+              Send
+            </button>
+          </div>
+        </div>
+        </div>
+
+</div>
+
+</div>
+</div>
+      {/* <h2>User List</h2>
+      <ul>
+        {users.map(user => (
+          <li key={user} onClick={() => SelectUser(user)}>{user}</li>
+        ))}
+      </ul> */}
+    {/* <div> */}
+    {/* <div> */}
+  {/* {pastMessages.map((message, index) => (
+    <div key={index}>
+      {message.content}
+    </div>
+  ))} */}
+{/* </div> */}
+    {/* </div> */}
+
+    {/* <input
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
@@ -129,8 +254,8 @@ export default function Home() {
         onClick={handleClick}
         className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
       >
-        Click Me
-             </button>
+        Send
+             </button> */}
 
         
       </div>
