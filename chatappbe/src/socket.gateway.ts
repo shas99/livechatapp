@@ -1,6 +1,7 @@
 import { ConnectedSocket, MessageBody, OnGatewayInit, SubscribeMessage, WebSocketGateway, WebSocketServer,OnGatewayDisconnect, OnGatewayConnection } from "@nestjs/websockets";
 import { Server,Socket } from 'socket.io';
-
+import { ConnectedUserService } from "./services/connectedUser";
+import { MessageService } from "./services/message/message.service";
 
 @WebSocketGateway({
     cors: {
@@ -10,6 +11,8 @@ import { Server,Socket } from 'socket.io';
     }
 })
 export class PollsGateway implements OnGatewayInit, OnGatewayDisconnect,OnGatewayConnection {
+
+    constructor(private readonly connectedUserService: ConnectedUserService,private readonly messageService: MessageService,) {}
 
     @WebSocketServer() server: Server;
     users : any = [] 
@@ -24,17 +27,20 @@ export class PollsGateway implements OnGatewayInit, OnGatewayDisconnect,OnGatewa
         this.users = this.users.filter((user:String) => user != username)
       }
 
-    handleConnection(client: Socket){
+    async handleConnection(client: Socket){
         const username = client.handshake.auth.username
-        console.log(`Client connected- handle connection ${username}`);
+        console.log(`Client connected- handle connection ${username}`);Object
         this.users.push(username)
+        await this.connectedUserService.addUser(username);
         client.emit("welcomeMessage", this.users);
     }  
 
 
     @SubscribeMessage('events')
-    handleEvent(@MessageBody() data: string,@ConnectedSocket() client: Socket): string {
+    async handleEvent(@MessageBody() data: any,@ConnectedSocket() client: Socket): Promise<any> {
         const username = client.handshake.auth.username;
+        await this.messageService.saveMessage(username, 'test@example', data.message);
+
         console.log(`Message received from ${username}, ${JSON.stringify(data)}`);
         this.server.emit('response', { message: 'Hello from the server!', receivedData: data,username:username,users:this.users });
         return data;
