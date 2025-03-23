@@ -41,7 +41,7 @@ export class PollsGateway implements OnGatewayInit, OnGatewayDisconnect,OnGatewa
     @SubscribeMessage('events')
     async handleEvent(@MessageBody() data: any,@ConnectedSocket() client: Socket): Promise<any> {
         const username = client.handshake.auth.username;
-        await this.messageService.saveMessage(username, 'test@example', data.message);
+        await this.messageService.saveMessage(username, data.selectedContact, data.message);
 
         console.log(`Message received from ${username}, ${JSON.stringify(data)}`);
 
@@ -51,7 +51,23 @@ export class PollsGateway implements OnGatewayInit, OnGatewayDisconnect,OnGatewa
           });
 
 
-        // this.server.emit('response', { message: 'Hello from the server!', receivedData: data,username:username,users:this.users });
+        return data;
+    }
+
+    @SubscribeMessage('getMessagesByUser')
+    async getMessagesByUser(@MessageBody() data: any,@ConnectedSocket() client: Socket): Promise<any> {
+        const username = client.handshake.auth.username;
+        
+        const messages = await this.messageService.getConversation(username, data.user);
+
+        console.log(`Message received from 123${username}, ${data.user}, ${messages}`);
+
+        this.server.to(username).emit('getMessagesByUser', {
+            from: username,
+            message: messages,
+          });
+
+
         return data;
     }
 
