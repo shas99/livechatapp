@@ -11,6 +11,8 @@ export default function Home() {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState<any[]>([])
+  const [message, setMessage] = useState("");
+  const [selectedContact, setSelectedContact] = useState("");
 
   const socket = useSocket(inputValue);
 
@@ -82,10 +84,20 @@ export default function Home() {
       <div>
         <pre> Hello: {auth.user?.profile.email} </pre>
 
-        <input
+<div>
+<button onClick={() => auth.removeUser()}>Sign out</button>
+      <h2>User List</h2>
+      <ul>
+        {users.map(user => (
+          <li key={user}>{user}</li>
+        ))}
+      </ul>
+    </div>
+
+    <input
         type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
         placeholder="Enter text here..."
         className="p-2 border rounded-md mb-4"
       />
@@ -96,16 +108,7 @@ export default function Home() {
         Click Me
              </button> */}
 
-<div>
-      <h2>User List</h2>
-      <ul>
-        {users.map(user => (
-          <li key={user}>{user}</li>
-        ))}
-      </ul>
-    </div>
-
-        <button onClick={() => auth.removeUser()}>Sign out</button>
+        
       </div>
     );
   }
