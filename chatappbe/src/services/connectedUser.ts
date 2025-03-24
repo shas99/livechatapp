@@ -9,7 +9,7 @@ export class ConnectedUserService {
   constructor(
     @InjectRepository(ConnectedUser)
     private userRepo: Repository<ConnectedUser>,
-  ) {}
+  ) { }
 
   async addUser(username: string) {
     try {
