@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PollsGateway } from './socket.gateway';
+import { ChatGateway } from './socket.gateway';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from './entities/sample.entity';
@@ -33,6 +33,6 @@ import { MessageService } from './services/message/message.service';
     TypeOrmModule.forFeature([User,ConnectedUser,Message]),
   ],
   controllers: [AppController],
-  providers: [AppService,PollsGateway,ConnectedUserService,MessageService],
+  providers: [AppService,ChatGateway,ConnectedUserService,MessageService],
 })
 export class AppModule {}
