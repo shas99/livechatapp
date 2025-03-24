@@ -28,7 +28,7 @@ export default function Home() {
 
     const handleWelcomeMessage = (data: any) => {
       console.log("Connected Users:", data);
-      setUsers([...data]);
+      setUsers([...data.filter((item:any) => item !== inputValue)]);
     };
 
     socket.on("welcomeMessage", handleWelcomeMessage);
@@ -77,6 +77,11 @@ export default function Home() {
 
   const handleClick = () => {
 
+    if(selectedContact == '' || selectedContact == null){
+      alert('Please select a contact before typing the message');
+      return;
+    }
+
     if (socket) {
       socket.emit('events', { selectedContact, message, from: inputValue });
 
@@ -90,6 +95,7 @@ export default function Home() {
       sender: inputValue,
     };
     setPastMesages(messages => [...messages, newMessage])
+    setMessage(message => '')
   }
 
 
@@ -128,7 +134,9 @@ export default function Home() {
                 {users.map(user => (
                   <li
                     key={user}
-                    className="p-3 cursor-pointer hover:bg-gray-700 border-b border-gray-600"
+                    className={`p-3 cursor-pointer hover:bg-gray-700 border-b border-gray-600 ${
+                      user === selectedContact ? 'bg-blue-500' : '' // Highlight selected user
+                    }`}
                     onClick={() => SelectUser(user)}
                   >
                     <span className="text-white">{user}</span>
@@ -145,10 +153,10 @@ export default function Home() {
                   {pastMessages.map((message, index) => (
                     <div
                       key={index}
-                      className={`p-3 rounded-lg max-w-[70%] ${message.sentByCurrentUser ? 'self-end bg-green-400 text-white' : 'self-start bg-gray-300 text-gray-900'
+                      className={`p-3 rounded-lg max-w-[70%] ${message.sender == inputValue ? 'self-end bg-green-400 text-white' : 'self-start bg-gray-300 text-gray-900'
                         } shadow`}
                     >
-                      {message.content}
+                      {message.content}-{message.sender}
                     </div>
                   ))}
                 </div>
