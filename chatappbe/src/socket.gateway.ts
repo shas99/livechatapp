@@ -42,7 +42,9 @@ export class ChatGateway implements OnGatewayInit, OnGatewayDisconnect,OnGateway
 
         try {
             console.log(`Client connected- handle connection ${username}`);
-            this.users.push(username)
+            if (!this.users.includes(username)) {
+                this.users.push(username);
+            }
             client.join(username);
             this.server.emit("welcomeMessage", this.users);
             // await this.connectedUserService.addUser(username);
