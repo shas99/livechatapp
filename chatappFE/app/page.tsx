@@ -45,6 +45,18 @@ export default function Home() {
       socket.emit('events', { name: "Hello" });
 
       socket.on('response', (data) => {
+        console.log(localStorage.getItem("selectedUser"))
+        console.log(data)
+
+        const newMessage = {
+          content: data.message,
+          sender: data.from,
+      };
+
+        if(localStorage.getItem("selectedUser") == data.from){
+          console.log(data.message)
+          setPastMesages(messages => [...messages,newMessage])
+          }
           console.log('Server response:', data);
       });
   }
@@ -84,8 +96,10 @@ export default function Home() {
   }
 
 
+
   const SelectUser = (user:string) => {
     setSelectedContact(user)
+    localStorage.setItem("selectedUser",user)
     socket?.emit('getMessagesByUser', { user });
 
     socket?.on('getMessagesByUser', (data) => {
