@@ -34,7 +34,7 @@ export default function Home() {
     socket.on("welcomeMessage", handleWelcomeMessage);
 
     return () => {
-      socket.off("welcomeMessage", handleWelcomeMessage); // Cleanup to avoid stacking
+      socket.off("welcomeMessage", handleWelcomeMessage);
     };
   }, [socket]);
 
