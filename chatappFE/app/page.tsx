@@ -93,6 +93,12 @@ export default function Home() {
           console.log('Server response:', data);
       });
   }
+
+  const newMessage = {
+    content: message,
+    sender: inputValue,
+};
+  setPastMesages(messages => [...messages,newMessage])
   }
 
 
