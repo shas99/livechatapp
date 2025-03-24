@@ -4,6 +4,8 @@ Full-stack chat application built with a modern tech stack, designed for scalabi
 
 👉 [Click here to view the live site](https://livechatapp-1351133795.us-east-2.elb.amazonaws.com/)
 
+![Architecture](./AWS_architecture_diagram_live_chat.drawio.png)
+
 🧩 ⚙️ Overview
 This project delivers a complete real-time chat experience, leveraging the power of Next.js for a responsive frontend and NestJS for a robust and scalable backend. The application is containerized using Docker, making deployments consistent and portable. It's deployed on AWS using ECS Fargate, providing serverless compute for easy scalability. Security is paramount, with authentication handled by AWS Cognito and secrets managed via AWS Systems Manager Parameter Store. Persistence is provided by PostgreSQL running on Amazon RDS. The entire project is managed via GitHub, including CI/CD with GitHub Actions.
 
