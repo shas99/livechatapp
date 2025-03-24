@@ -27,10 +27,6 @@ export class MessageService {
         });
       }
 
-    // async getConversation(userA: string, userB: string): Promise<Message[]> {
-    //     return await this.messageRepo.find({
-    //       order: { timestamp: 'ASC' } // Optional: keep chronological order
-    //     });
-    //   }
+
   
 }
